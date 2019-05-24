@@ -30,13 +30,24 @@ class ViewController: UIViewController {
     @IBAction func editButton(_ sender: Any) {
         myTableView.isEditing = !myTableView.isEditing
     }
-    
-    
 }
 
-//TODO: сделать контролируемое кол-во загрузки строк
-
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
+extension ViewController: UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
+    
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        
+        for indexPath in indexPaths {
+            print("first \(indexPath) method \(indexPaths)")
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
+        for _ in indexPaths {
+            print("second method \(indexPaths)")
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return textArray.count
     }
@@ -44,12 +55,12 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = myTableView.dequeueReusableCell(withIdentifier: idCell, for: indexPath)
         cell.textLabel?.text = textArray[indexPath.row]
+        print(indexPath.row)
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        
         
         return .delete
     }
@@ -59,10 +70,22 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         if editingStyle == .delete {
             textArray.remove(at: indexPath.row)
             myTableView.deleteRows(at: [indexPath], with: .top)
-            myTableView.del
         }
+    }
+    
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        
+        let item = textArray[sourceIndexPath.row]
+        textArray.remove(at: sourceIndexPath.row)
+        textArray.insert(item, at: destinationIndexPath.row)
         
     }
+    
+    
     
 }
 

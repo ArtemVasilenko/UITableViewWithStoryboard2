@@ -23,7 +23,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="zWr-ek-g6E">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="zWr-ek-g6E">
                                         <rect key="frame" x="0.0" y="28" width="374" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zWr-ek-g6E" id="geu-Ty-3tj">
@@ -36,6 +36,7 @@
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="jhk-t5-xzX"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="Aex-eB-7sI"/>
+                                    <outlet property="prefetchDataSource" destination="BYZ-38-t0r" id="bhp-a2-8sY"/>
                                 </connections>
                             </tableView>
                         </subviews>
