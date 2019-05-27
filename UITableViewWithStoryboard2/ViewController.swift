@@ -95,9 +95,11 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, UITableVie
         if action == #selector(copy(_:)) {
             print("copy true")
             return true
-            
+
         } else if action == #selector(paste(_:)) {
             print("paste true")
+            return true
+        } else if action == #selector(cut(_:)) {
             return true
         }
         
@@ -106,24 +108,23 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource, UITableVie
     
     func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
         
+        let pasteBoard = UIPasteboard.general //синглтон обращение к буферу обмена
+
         if action == #selector(copy(_:)) {
             let cell = tableView.cellForRow(at: indexPath)
-            let pasteBoard = UIPasteboard.general //синглтон обращение к буферу обмена
             pasteBoard.string = cell?.textLabel?.text
-            
+
         } else if action == #selector(paste(_:)) {
-            
-//            let cell = tableView.cellForRow(at: indexPath)
-            let pasteBoard = UIPasteboard.general //синглтон обращение к буферу обмена
-            print("copy cell = \(pasteBoard.string!)")
-            
+            print("paste cell = \(pasteBoard.string!)")
             textArray[indexPath.row] = pasteBoard.string!
+            tableView.reloadData()
             
+        } else if action == #selector(cut(_:)) {
+            let cell = tableView.cellForRow(at: indexPath)
+            pasteBoard.string = cell?.textLabel?.text
+            textArray[indexPath.row] = ""
             tableView.reloadData()
         }
-        
     }
-    
-    
 }
 
